@@ -1,0 +1,14 @@
+fastapi
+uvicorn
+streamlit
+python-multipart
+langchain
+langchain-community
+langchain-openai
+chromadb
+beautifulsoup4
+unstructured
+requests
+tiktoken
+selenium
+python-dotenv
