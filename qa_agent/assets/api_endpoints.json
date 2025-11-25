@@ -1,0 +1,26 @@
+{
+    "POST /apply_coupon": {
+        "description": "Validates and applies a discount coupon.",
+        "parameters": {
+            "code": "string (Required) - The coupon code to apply."
+        },
+        "responses": {
+            "200": "Coupon applied successfully.",
+            "400": "Invalid coupon code."
+        }
+    },
+    "POST /submit_order": {
+        "description": "Submits the final order for processing.",
+        "parameters": {
+            "name": "string (Required)",
+            "email": "string (Required)",
+            "address": "string (Required)",
+            "items": "array of objects",
+            "total_amount": "number"
+        },
+        "responses": {
+            "200": "Order placed successfully.",
+            "422": "Validation error (missing fields)."
+        }
+    }
+}
