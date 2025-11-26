@@ -12,7 +12,7 @@ class KnowledgeBase:
     def __init__(self):
         self.vectorstore = None
         self.retriever = None
-        self.llm = ChatGoogleGenerativeAI(model="gemini-1.5-flash", temperature=0) 
+        self.llm = ChatGoogleGenerativeAI(model="gemini-2.5-flash", temperature=0) 
 
     def build_knowledge_base(self, file_paths: List[str]):
         documents = []
