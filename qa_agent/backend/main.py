@@ -24,9 +24,6 @@ class ScriptRequest(BaseModel):
 
 @app.post("/upload")
 async def upload_files(files: List[UploadFile] = File(...)):
-    """
-    Uploads support documents and builds the knowledge base.
-    """
     upload_dir = "uploads"
     if os.path.exists(upload_dir):
         shutil.rmtree(upload_dir)

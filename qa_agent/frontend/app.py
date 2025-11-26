@@ -10,18 +10,11 @@ st.set_page_config(page_title="Autonomous QA Agent", layout="wide")
 st.title("🤖 Autonomous QA Agent")
 st.markdown("Generate Test Cases and Selenium Scripts from Documentation and HTML.")
 
-# Sidebar for API Key
 with st.sidebar:
     st.header("Configuration")
-    api_key = st.text_input("OpenAI API Key", type="password")
+    api_key = st.text_input("Google API Key", type="password")
     if api_key:
-        os.environ["OPENAI_API_KEY"] = api_key
-        # Note: In a real production app, we'd pass this to the backend securely.
-        # For this demo running locally, setting it here might not affect the separate backend process 
-        # unless we pass it in the request or run them in the same env.
-        # To make it work easily, we will assume the user runs the backend with the key set, 
-        # OR we can pass it in headers (requires backend update).
-        # For now, let's instruct the user to set it in the terminal or .env.
+        os.environ["GOOGLE_API_KEY"] = api_key
         st.info("Ensure the backend is running with this API Key available.")
 
 # Tabs

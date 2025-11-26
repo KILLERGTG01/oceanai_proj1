@@ -3,7 +3,7 @@ from typing import List
 from langchain_community.document_loaders import UnstructuredMarkdownLoader, TextLoader, JSONLoader
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_community.vectorstores import Chroma
-from langchain_openai import OpenAIEmbeddings, ChatOpenAI
+from langchain_google_genai import GoogleGenerativeAIEmbeddings, ChatGoogleGenerativeAI
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.output_parsers import StrOutputParser
 from langchain_core.runnables import RunnablePassthrough
@@ -12,9 +12,7 @@ class KnowledgeBase:
     def __init__(self):
         self.vectorstore = None
         self.retriever = None
-        # Initialize LLM - Assuming OpenAI for now, user needs to set OPENAI_API_KEY env var
-        # In a real scenario, we might want to pass the key from the UI
-        self.llm = ChatOpenAI(model="gpt-4o", temperature=0) 
+        self.llm = ChatGoogleGenerativeAI(model="gemini-1.5-flash", temperature=0) 
 
     def build_knowledge_base(self, file_paths: List[str]):
         documents = []
@@ -22,7 +20,6 @@ class KnowledgeBase:
             if path.endswith(".md"):
                 loader = UnstructuredMarkdownLoader(path)
             elif path.endswith(".json"):
-                 # JSONLoader requires a jq_schema, using TextLoader for simplicity for now as raw text
                 loader = TextLoader(path)
             else:
                 loader = TextLoader(path)
@@ -31,12 +28,10 @@ class KnowledgeBase:
         text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=200)
         splits = text_splitter.split_documents(documents)
 
-        # Create Vector Store
-        # Using a persistent directory for the vector DB
         persist_directory = "chroma_db"
         self.vectorstore = Chroma.from_documents(
             documents=splits, 
-            embedding=OpenAIEmbeddings(),
+            embedding=GoogleGenerativeAIEmbeddings(model="models/embedding-001"),
             persist_directory=persist_directory
         )
         self.retriever = self.vectorstore.as_retriever()

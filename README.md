@@ -43,7 +43,7 @@ graph TD
 
 ### Prerequisites
 *   Python 3.9+
-*   OpenAI API Key
+*   Google Gemini API Key
 
 ### Installation
 
@@ -61,9 +61,9 @@ graph TD
     ```
 
 3.  **Configure API Key**:
-    Open `qa_agent/.env` and add your OpenAI API Key:
+    Open `qa_agent/.env` and add your Google API Key:
     ```env
-    OPENAI_API_KEY=sk-your-key-here
+    GOOGLE_API_KEY=AIzaSy...
     ```
 
 ## 🏃 Usage
